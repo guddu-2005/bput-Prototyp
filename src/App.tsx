@@ -60,11 +60,6 @@ import { SignOffPage } from './components/management/pages/SignOffPage';
 import { ManagementReportsPage } from './components/management/pages/ManagementReportsPage';
 import { ManagementActivityPage } from './components/management/pages/ManagementActivityPage';
 
-// Auditor Pages & Layout
-import { ProtectedAuditorRoute } from './components/auth/ProtectedAuditorRoute';
-import { AuditorLayout } from './components/auditor/layout/AuditorLayout';
-import { AuditorDashboardPage } from './components/auditor/pages/AuditorDashboardPage';
-
 export function App() {
   return (
     <DemoAuthProvider>
@@ -177,24 +172,6 @@ export function App() {
               <Route path="sign-off" element={<SignOffPage />} />
               <Route path="reports" element={<ManagementReportsPage />} />
               <Route path="activity" element={<ManagementActivityPage />} />
-            </Route>
-
-            {/* Auditor Portal Redirection */}
-            <Route path="/auditor" element={<Navigate to="/auditor/dashboard" replace />} />
-
-            {/* Protected Auditor / Assurer Portal Subsystem */}
-            <Route
-              path="/auditor"
-              element={
-                <ProtectedAuditorRoute>
-                  <AuditorLayout />
-                </ProtectedAuditorRoute>
-              }
-            >
-              <Route path="dashboard" element={<AuditorDashboardPage />} />
-              <Route path="evidence" element={<EvidenceReviewPage />} />
-              <Route path="lineage" element={<ReviewerDataLineagePage />} />
-              <Route path="assurance-statement" element={<AuditorDashboardPage />} />
             </Route>
 
             {/* Fallback */}

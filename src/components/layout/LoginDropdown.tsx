@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { PORTAL_OPTIONS } from '../../constants/portals';
 import type { PortalRole } from '../../types/auth';
-import { ALL_DEMO_PORTAL_CREDENTIALS } from '../../context/DemoAuthContext';
 
 interface LoginDropdownProps {
   isOpen: boolean;
@@ -77,7 +76,6 @@ export const LoginDropdown: React.FC<LoginDropdownProps> = ({
       <div className="py-1.5 divide-y divide-slate-50">
         {PORTAL_OPTIONS.map((portal, index) => {
           const Icon = portal.icon;
-          const creds = ALL_DEMO_PORTAL_CREDENTIALS[portal.id];
           return (
             <button
               key={portal.id}
@@ -88,26 +86,17 @@ export const LoginDropdown: React.FC<LoginDropdownProps> = ({
                 onClose();
               }}
               onKeyDown={(e) => handleItemKeyDown(e, index)}
-              className="w-full flex items-center justify-between px-4 py-2.5 text-left transition-colors duration-150 hover:bg-slate-100/80 focus:bg-slate-100/90 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#003B73]/40 group cursor-pointer"
+              className="w-full flex items-center justify-between px-4 py-3 text-left transition-colors duration-150 hover:bg-slate-100/80 focus:bg-slate-100/90 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#003B73]/40 group"
             >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="text-slate-600 group-hover:text-[#003B73] transition-colors shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="text-slate-600 group-hover:text-[#003B73] transition-colors">
                   <Icon className="w-5 h-5 stroke-[1.8]" />
                 </div>
-                <div className="min-w-0">
-                  <span className="text-sm font-semibold text-slate-800 group-hover:text-slate-900 transition-colors block truncate">
-                    {portal.title}
-                  </span>
-                  {creds && (
-                    <span className="text-[10px] text-slate-500 font-mono flex items-center gap-1 truncate">
-                      <span>{creds.email}</span>
-                      <span className="text-slate-400">&bull;</span>
-                      <span className="text-slate-600 font-semibold">{creds.password}</span>
-                    </span>
-                  )}
-                </div>
+                <span className="text-sm font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">
+                  {portal.title}
+                </span>
               </div>
-              <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-transform group-hover:translate-x-0.5 shrink-0" />
+              <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-transform group-hover:translate-x-0.5" />
             </button>
           );
         })}
